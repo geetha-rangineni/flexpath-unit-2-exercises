@@ -1,3 +1,7 @@
--- Write a query to list all products, including their ProductID, ProductName, and CategoryName (from the Category
--- table.) Use a LEFT JOIN to ensure that products are displayed even if they do not have a category assigned.
--- Order the results by ProductID in ascending order.
+SELECT
+    p.ProductID,
+    p.ProductName,
+    c.CategoryName
+FROM Products p
+LEFT JOIN Categories c ON p.CategoryID = c.CategoryID
+ORDER BY p.ProductID;

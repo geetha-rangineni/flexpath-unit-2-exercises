@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="0547c8f7-5314-4969-8b4d-0e6535bd0db5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/creating-databases/src/test/java/TestCreateScript.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../05-java-and-object-oriented-programming/java-and-object-oriented-programming/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/creating-databases/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/creating-databases/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/creating-databases/src/main/resources/create-database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/creating-databases/src/main/resources/create-database.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/creating-databases/src/test/java/TestCreateScript.java" beforeDir="false" afterPath="$PROJECT_DIR$/creating-databases/src/test/java/TestCreateScript.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,9 +19,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2oBEv1jDPYdUQ2ebSHtOj296Qnq" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -23,12 +29,48 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "JUnit.TestCreateScript.executor": "Run",
+    "JUnit.TestCreateScript.testBookTable.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/mikel/projects/flexpath-unit-2-exercises/01-creating-databases/creating-databases/pom.xml"
+    "last_opened_file_path": "C:/Users/geeth/Git Repo/flexpath-unit-2-exercises/01-creating-databases",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "project.scopes"
   }
 }]]></component>
+  <component name="RunManager" selected="JUnit.TestCreateScript">
+    <configuration name="TestCreateScript" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="creating-databases" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestCreateScript" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestCreateScript.testBookTable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="creating-databases" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestCreateScript" />
+      <option name="METHOD_NAME" value="testBookTable" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.TestCreateScript" />
+        <item itemvalue="JUnit.TestCreateScript.testBookTable" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

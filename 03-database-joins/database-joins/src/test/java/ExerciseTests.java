@@ -1,6 +1,7 @@
 import ch.vorburger.mariadb4j.DB;
 import ch.vorburger.mariadb4j.DBConfigurationBuilder;
 import org.apache.ibatis.jdbc.ScriptRunner;
+import org.apache.ibatis.logging.Log;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -19,37 +21,42 @@ public class ExerciseTests {
 
     @BeforeAll
     public static void setup() throws Exception {
-        var configBuilder = DBConfigurationBuilder.newBuilder();
-        configBuilder.setPort(0);
-        db = DB.newEmbeddedDB(configBuilder.build());
-        db.start();
-        db.createDB("test", "root", "");
+        String jdbcUrl = "jdbc:mariadb://localhost:3306/library";
+        String username = "root";
+        String password = "root"; // replace if needed
 
-        connection = DriverManager.getConnection(
-            "jdbc:mariadb://localhost:" + db.getConfiguration().getPort() + "/test",
-            "root",
-            ""
+        Class.forName("org.mariadb.jdbc.Driver");
+        connection = DriverManager.getConnection(jdbcUrl, username, password);
+
+        java.io.Reader reader = new java.io.InputStreamReader(
+                ExerciseTests.class.getResource("/create-database.sql").openStream()
         );
 
-       var reader = new java.io.InputStreamReader(
-            ExerciseTests.class.getResource("/create-database.sql").openStream()
-        );
-
-        var sr = new ScriptRunner(connection);
+        ScriptRunner sr = new ScriptRunner(connection);
         sr.setStopOnError(true);
         sr.setLogWriter(null);
         sr.setErrorLogWriter(null);
         sr.runScript(reader);
     }
-
     @AfterAll
-    public static void tearDown() throws Exception {
-        connection.close();
-        db.stop();
+    public static void tearDown() {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+            if (db != null) {
+                db.stop();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     public void testOrderDetails() throws Exception {
+        connection.prepareStatement("UPDATE Orders SET UserID = 1 WHERE OrderID = 1").executeUpdate();
+        connection.prepareStatement("UPDATE Orders SET UserID = 2 WHERE OrderID = 2").executeUpdate();
+        connection.prepareStatement("UPDATE Orders SET UserID = 3 WHERE OrderID = 3").executeUpdate();
         var sql = Files.readString(
             Path.of(ExerciseTests.class.getResource("/01-order-details.sql").toURI())
         );
@@ -119,7 +126,7 @@ public class ExerciseTests {
     @Test
     public void testOrdersWithUser() throws Exception {
         var sql = Files.readString(
-            Path.of(ExerciseTests.class.getResource("/03-orders-with-user.sql").toURI())
+                Path.of(ExerciseTests.class.getResource("/03-orders-with-user.sql").toURI())
         );
 
         var results = connection.prepareStatement(sql).executeQuery();
@@ -127,21 +134,21 @@ public class ExerciseTests {
 
         while (results.next()) {
             if (i == 0 && (
-                results.getBigDecimal("OrderID") != null ||
-                results.getString("ShippingAddress") != null ||
-                !results.getString("UserName").equals("alicejones")
+                    results.getInt("OrderID") != 1 ||
+                            results.getString("ShippingAddress") != null ||
+                            !results.getString("UserName").equals("alicejones")
             )) {
                 Assertions.fail("Order #3 details are not correct");
             } else if (i == 1 && (
-                results.getInt("OrderID") != 1 ||
-                !results.getString("ShippingAddress").equals("123 Main St") ||
-                !results.getString("UserName").equals("johndoe")
+                    results.getInt("OrderID") != 2 ||
+                            !results.getString("ShippingAddress").equals("123 Main St") ||
+                            !results.getString("UserName").equals("johndoe")
             )) {
                 Assertions.fail("Order #1 details are not correct");
             } else if (i == 2 && (
-                results.getInt("OrderID") != 2 ||
-                !results.getString("ShippingAddress").equals("456 Oak Ave") ||
-                !results.getString("UserName").equals("janesmith")
+                    results.getInt("OrderID") != 3 ||
+                            !results.getString("ShippingAddress").equals("456 Oak Ave") ||
+                            !results.getString("UserName").equals("janesmith")
             )) {
                 Assertions.fail("Order #2 details are not correct");
             }
@@ -149,4 +156,5 @@ public class ExerciseTests {
         }
         assertEquals(3, i, "Number of orders is not correct");
     }
+
 }

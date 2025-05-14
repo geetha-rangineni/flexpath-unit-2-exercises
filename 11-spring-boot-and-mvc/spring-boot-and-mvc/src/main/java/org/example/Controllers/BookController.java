@@ -1,37 +1,52 @@
 package org.example.Controllers;
+
 import org.example.Models.Book;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/books")
 public class BookController {
-    public List<Book> books = new ArrayList<>(List.of(
-            new Book(1, "The Great Gatsby", "F. Scott Fitzgerald", 1925),
-            new Book(2, "To Kill a Mockingbird", "Harper Lee", 1960),
-            new Book(3, "The Catcher in the Rye", "J.D. Salinger", 1951),
-            new Book(4, "Beloved", "Toni Morrison", 1987),
-            new Book(5, "The Color Purple", "Alice Walker", 1982)
-    ));
+    private final List<Book> books = new ArrayList<>();
 
-    public List<Book> getBooks() {
-        throw new UnsupportedOperationException("Not implemented yet");
+    public BookController() {
+        books.add(new Book(1, "The Great Gatsby", "F. Scott Fitzgerald", 1925));
+        books.add(new Book(2, "To Kill a Mockingbird", "Harper Lee", 1960));
+        books.add(new Book(3, "The Catcher in the Rye", "J.D. Salinger", 1951));
+        books.add(new Book(4, "Beloved", "Toni Morrison", 1987));
+        books.add(new Book(5, "The Color Purple", "Alice Walker", 1982));
     }
 
-    public Book getBookById(int id) {
-        throw new UnsupportedOperationException("Not implemented yet");
+    @GetMapping
+    public List<Book> getAllBooks() {
+        return books;
     }
 
-    public void addBook(Book book) {
-        throw new UnsupportedOperationException("Not implemented yet");
+    @GetMapping("/{id}")
+    public Book getBookById(@PathVariable int id) {
+        return books.stream().filter(book -> book.getId() == id).findFirst().orElse(null);
     }
 
-    public void updateBook(int id, Book book) {
-        throw new UnsupportedOperationException("Not implemented yet");
+    @PostMapping
+    public Book addBook(@RequestBody Book book) {
+        books.add(book);
+        return book;
     }
 
-    public void deleteBook(int id) {
-        throw new UnsupportedOperationException("Not implemented yet");
+    @PutMapping("/{id}")
+    public Book updateBook(@PathVariable int id, @RequestBody Book updatedBook) {
+        for (int i = 0; i < books.size(); i++) {
+            if (books.get(i).getId() == id) {
+                books.set(i, updatedBook);
+                return updatedBook;
+            }
+        }
+        return null;
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteBook(@PathVariable int id) {
+        books.removeIf(book -> book.getId() == id);
     }
 }

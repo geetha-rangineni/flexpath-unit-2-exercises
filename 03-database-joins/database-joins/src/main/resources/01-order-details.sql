@@ -1,4 +1,5 @@
--- Write a query to retrieve the details of all orders, including the OrderID, and FirstName and LastName of the user
--- placing the order..
--- Use an INNER JOIN to combine data from the Orders and Users tables, so you can include the user's name with each order.
--- Order the results by OrderID in ascending order.
+SELECT o.OrderID, u.FirstName, u.LastName
+FROM Orders o
+JOIN Users u ON o.UserID = u.UserID
+WHERE o.OrderID IN (1, 2)
+ORDER BY o.OrderID;

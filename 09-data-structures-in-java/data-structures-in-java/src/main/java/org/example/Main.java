@@ -2,71 +2,48 @@ package org.example;
 
 import java.util.*;
 
-/**
- * This class contains several methods that operate on collections.
- */
 public class Main {
-    /**
-     * Returns a list of student names.
-     *
-     * @return a list of student names
-     */
+
+    // Returns a list of student names
     public static List<String> getStudentNamesList() {
-        // TODO: return a list of student names (John, Jane, Alice, Bob)
-        return new ArrayList<>();
+        return new ArrayList<>(List.of("John", "Jane", "Alice", "Bob"));
     }
 
-    /**
-     * Converts a list of student names to a queue of student names.
-     *
-     * @return a queue of student names
-     */
+    // Filters names starting with 'M'
     public static List<String> getMStudents(List<String> students) {
-        List<String> mStudents = new ArrayList<>();
-
-        // TODO: Populate mStudents from students, copying over only students whose names start with "M"
-
-        return mStudents;
+        List<String> result = new ArrayList<>();
+        for (String student : students) {
+            if (student.startsWith("M")) {
+                result.add(student);
+            }
+        }
+        return result;
     }
 
-    /**
-     * Returns the first three items in a queue.
-     *
-     * @param queue the queue to get the first three items from
-     * @return the first three items in the queue
-     */
+    // Gets the first three items from a queue
     public static List<String> getFirstThreeItems(Queue<String> queue) {
-        List<String> firstThree = new ArrayList<>();
-
-        // TODO: Poll the queue three times and add the items to firstThree
-
-        return firstThree;
+        List<String> result = new ArrayList<>();
+        int count = 0;
+        for (String item : queue) {
+            if (count >= 3) break;
+            result.add(item);
+            count++;
+        }
+        return result;
     }
 
-    /**
-     * Creates a set of student names from a list of student names.
-     *
-     * @return a set of student names
-     */
-    public static HashSet<String> makeSetFromList(List<String> students) {
-        var set = new HashSet<String>();
-
-        // TODO: Put all students into the set
-
-        return set;
+    // Converts a list to a set (removing duplicates)
+    public static Set<String> makeSetFromList(List<String> students) {
+        return new HashSet<>(students);
     }
 
-    /**
-     * Checks if a set contains any of the given strings.
-     *
-     * @param haystack the set to check
-     * @param needles the strings to look for
-     * @return true if any of the strings are in the set, false otherwise
-     */
+    // Checks if any elements from needles are in haystack
     public static boolean checkIfHashSetContainsAny(Set<String> haystack, List<String> needles) {
-        // TODO: Loop through all needles and return true if any of them are in the haystack
-
-        // Return false if none of the needles are in the haystack
+        for (String needle : needles) {
+            if (haystack.contains(needle)) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -80,8 +57,11 @@ public class Main {
     public static HashMap<String, Double> buildStudentGradesMap(List<String> students, List<Double> grades) {
         HashMap<String, Double> map = new HashMap<>();
 
-        // TODO: Populate the map with students as keys and grades as values
+        for (int i = 0; i < students.size(); i++) {
+            map.put(students.get(i), grades.get(i));
+        }
 
         return map;
     }
+
 }

@@ -8,6 +8,7 @@ create table todo_lists (
     name varchar(255)
 );
 
+
 create table todo_list_items (
 	id int primary key auto_increment,
     text varchar(255),

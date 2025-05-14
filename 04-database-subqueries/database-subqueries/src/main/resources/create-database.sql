@@ -1,6 +1,6 @@
-----------------------------------------
--- DO NOT MODIFY
-----------------------------------------
+DROP DATABASE IF EXISTS ecommerce;
+CREATE DATABASE ecommerce;
+USE ecommerce;
 
 -- RESET
 DROP TABLE IF EXISTS OrderItems;

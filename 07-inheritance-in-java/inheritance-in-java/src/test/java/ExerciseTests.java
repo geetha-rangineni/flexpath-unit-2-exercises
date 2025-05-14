@@ -3,7 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ExerciseTests {
     // TODO: Uncomment the following tests after you've implemented the Lion class
-    /*
+
     @Test
     public void TestLionEat() {
         org.example.Lion lion = new org.example.Lion("Simba");
@@ -21,10 +21,10 @@ public class ExerciseTests {
         org.example.Lion lion = new org.example.Lion("Simba");
         assertEquals("Simba is sleeping. Simba dreams of a delicious steak.", lion.sleep());
     }
-     */
+
 
     // TODO: Uncomment the following tests after you've implemented the Elephant class
-    /*
+
     @Test
     public void TestElephantEat() {
         org.example.Elephant elephant = new org.example.Elephant("Dumbo");
@@ -42,10 +42,10 @@ public class ExerciseTests {
         org.example.Elephant elephant = new org.example.Elephant("Dumbo");
         assertEquals("Dumbo is sleeping.", elephant.sleep());
     }
-     */
+
 
     // TODO: Uncomment the following tests after you've implemented the Parrot class
-    /*
+
     @Test
     public void TestParrotEat() {
         org.example.Parrot parrot = new org.example.Parrot("Polly");
@@ -69,5 +69,4 @@ public class ExerciseTests {
         org.example.Parrot parrot = new org.example.Parrot("Polly");
         assertEquals("Polly is flying around the zoo.", parrot.fly());
     }
-    */
 }

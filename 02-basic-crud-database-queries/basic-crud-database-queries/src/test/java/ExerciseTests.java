@@ -21,35 +21,38 @@ public class ExerciseTests {
     private static DB db;
     private static Connection connection;
 
+
     @BeforeAll
     public static void setup() throws Exception {
-        var configBuilder = DBConfigurationBuilder.newBuilder();
-        configBuilder.setPort(0);
-        db = DB.newEmbeddedDB(configBuilder.build());
-        db.start();
-        db.createDB("test", "root", "");
+        String jdbcUrl = "jdbc:mariadb://localhost:3306/library";
+        String username = "root";
+        String password = "root"; // replace if needed
 
-        connection = DriverManager.getConnection(
-            "jdbc:mariadb://localhost:" + db.getConfiguration().getPort() + "/test",
-            "root",
-            ""
+        Class.forName("org.mariadb.jdbc.Driver");
+        connection = DriverManager.getConnection(jdbcUrl, username, password);
+
+        java.io.Reader reader = new java.io.InputStreamReader(
+                ExerciseTests.class.getResource("/create-database.sql").openStream()
         );
 
-        var reader = new java.io.InputStreamReader(
-            ExerciseTests.class.getResource("/create-database.sql").openStream()
-        );
-
-        var sr = new ScriptRunner(connection);
+        ScriptRunner sr = new ScriptRunner(connection);
         sr.setStopOnError(true);
         sr.setLogWriter(null);
         sr.setErrorLogWriter(null);
         sr.runScript(reader);
     }
-
     @AfterAll
-    public static void tearDown() throws Exception {
-        connection.close();
-        db.stop();
+    public static void tearDown() {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+            if (db != null) {
+                db.stop();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test

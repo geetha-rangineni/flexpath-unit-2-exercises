@@ -44,7 +44,11 @@ public class Account {
      * @return True if the withdrawal was successful, false otherwise.
      */
     public boolean withdraw(double amount) {
+        if (amount > balance) {
+            return false;
+        }
         balance -= amount;
         return true;
     }
+
 }
